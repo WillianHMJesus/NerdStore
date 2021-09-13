@@ -21,7 +21,7 @@ namespace NerdStore.Catalog.Domain.Entities
         public string Description { get; private set; }
         public ICollection<Product> Products { get; set; }
 
-        protected override void Validate()
+        protected void Validate()
         {
             AssertionConcern.ValidateLessThanEqualMinimum(Code, 0, "O campo Código da categoria não pode ser menor ou igual a zero.");
             AssertionConcern.ValidateNullOrEmpty(Name, "O campo Nome da categoria não pode ser vazio.");

@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NerdStore.Catalog.Application.Services;
 using NerdStore.Catalog.Application.ViewModels;
+using NerdStore.Core.Communication.Mediator;
+using NerdStore.Core.Messages.CommonMessages.Notifications;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +14,10 @@ namespace NerdStore.API.Controllers
     {
         private readonly IProductAppService _productAppService;
 
-        public ProductsController(IProductAppService productAppService)
+        public ProductsController(IProductAppService productAppService,
+            IMediatorHandler mediator,
+            INotificationHandler<DomainNotification> notifications)
+            : base(notifications, mediator)
         {
             _productAppService = productAppService;
         }
@@ -81,7 +87,7 @@ namespace NerdStore.API.Controllers
                     return Ok();
                 }
 
-                return ResponseModelStateError();
+                return BadRequest(new { Errors = GetModelStateErrors() });
             }
             catch (Exception exception)
             {
@@ -100,7 +106,7 @@ namespace NerdStore.API.Controllers
                     return Ok();
                 }
 
-                return ResponseModelStateError();
+                return BadRequest(new { Errors = GetModelStateErrors() });
             }
             catch (Exception exception)
             {

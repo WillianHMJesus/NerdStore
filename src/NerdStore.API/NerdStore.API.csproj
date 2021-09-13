@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -18,6 +18,10 @@
   <ItemGroup>
     <ProjectReference Include="..\NerdStore.Catalog.Application\NerdStore.Catalog.Application.csproj" />
     <ProjectReference Include="..\NerdStore.Catalog.Data\NerdStore.Catalog.Data.csproj" />
+    <ProjectReference Include="..\NerdStore.Checkout.Application\NerdStore.Checkout.Application.csproj" />
+    <ProjectReference Include="..\NerdStore.Checkout.Data\NerdStore.Checkout.Data.csproj" />
+    <ProjectReference Include="..\NerdStore.Payment.AntiCorruption\NerdStore.Payment.AntiCorruption.csproj" />
+    <ProjectReference Include="..\NerdStore.Payment.Data\NerdStore.Payment.Data.csproj" />
   </ItemGroup>
 
 </Project>

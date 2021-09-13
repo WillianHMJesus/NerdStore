@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using NerdStore.Catalog.Domain.Entities;
 using NerdStore.Core.Data;
+using NerdStore.Core.Messages;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,7 +25,11 @@ namespace NerdStore.Catalog.Data.Contexts
                 //property.Relational().ColumnType = "varchar(100)";
             }
 
+            modelBuilder.Ignore<Event>();
+            modelBuilder.Ignore<ValidationResult>();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public async Task<bool> CommitAsync()

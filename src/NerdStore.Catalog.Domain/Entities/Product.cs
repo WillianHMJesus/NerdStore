@@ -32,7 +32,7 @@ namespace NerdStore.Catalog.Domain.Entities
         public Dimension Dimension { get; private set; }
         public Category Category { get; private set; }
 
-        protected override void Validate()
+        protected void Validate()
         {
             AssertionConcern.ValidateNullOrEmpty(Name, "O campo Nome do produto não pode ser vazio.");
             AssertionConcern.ValidateNullOrEmpty(Description, "O campo Descrição do produto não pode ser vazio.");

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using NerdStore.Core.Messages;
+using System;
+using System.Collections.Generic;
 
 namespace NerdStore.Core.DomainObjects
 {
@@ -10,8 +13,31 @@ namespace NerdStore.Core.DomainObjects
         }
 
         public Guid Id { get; private set; }
+        public ValidationResult ValidationResult { get; set; }
 
-        protected abstract void Validate();
+        private List<Event> _events;
+        public IReadOnlyCollection<Event> Events => _events?.AsReadOnly();
+
+        public virtual bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddEvent(Event _event)
+        {
+            _events = _events ?? new List<Event>();
+            _events.Add(_event);
+        }
+
+        public void RemoveEvent(Event _event)
+        {
+            _events?.Remove(_event);
+        }
+
+        public void ClearEvents()
+        {
+            _events?.Clear();
+        }
 
         public override bool Equals(object obj)
         {

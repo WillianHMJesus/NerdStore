@@ -10,6 +10,8 @@ using Microsoft.OpenApi.Models;
 using NerdStore.API.Setup;
 using NerdStore.Catalog.Application.AutoMapper;
 using NerdStore.Catalog.Data.Contexts;
+using NerdStore.Checkout.Data.Contexts;
+using NerdStore.Payment.Data.Contexts;
 
 namespace NerdStore.API
 {
@@ -25,6 +27,10 @@ namespace NerdStore.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CatalogContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CheckoutContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<PaymentContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();

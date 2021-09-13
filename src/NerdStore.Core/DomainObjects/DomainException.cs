@@ -18,5 +18,14 @@ namespace NerdStore.Core.DomainObjects
             : base(message, innerException)
         {
         }
+
+        public string GetErrorMessage()
+        {
+            var errorMessage = string.IsNullOrEmpty(Message) ?
+                InnerException?.Message :
+                Message;
+
+            return errorMessage;
+        }
     }
 }

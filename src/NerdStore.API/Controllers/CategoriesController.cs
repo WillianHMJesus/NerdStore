@@ -1,17 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NerdStore.Catalog.Application.Services;
 using NerdStore.Catalog.Application.ViewModels;
+using NerdStore.Core.Communication.Mediator;
+using NerdStore.Core.Messages.CommonMessages.Notifications;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NerdStore.API.Controllers
 {
-    public class CategoryController : BaseController
+    public class CategoriesController : BaseController
     {
         private readonly ICategoryAppService _categoryAppService;
 
-        public CategoryController(ICategoryAppService categoryAppService)
+        public CategoriesController(ICategoryAppService categoryAppService,
+            IMediatorHandler mediator,
+            INotificationHandler<DomainNotification> notifications)
+            : base(notifications, mediator)
         {
             _categoryAppService = categoryAppService;
         }
@@ -63,7 +69,7 @@ namespace NerdStore.API.Controllers
                     return Ok();
                 }
 
-                return ResponseModelStateError();
+                return BadRequest(new { Errors = GetModelStateErrors() });
             }
             catch (Exception exception)
             {
@@ -82,7 +88,7 @@ namespace NerdStore.API.Controllers
                     return Ok();
                 }
 
-                return ResponseModelStateError();
+                return BadRequest(new { Errors = GetModelStateErrors() });
             }
             catch (Exception exception)
             {
