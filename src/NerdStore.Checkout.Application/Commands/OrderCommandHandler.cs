@@ -60,8 +60,6 @@ namespace NerdStore.Checkout.Application.Commands
                 {
                     _orderRepository.AddItem(orderItem);
                 }
-
-                order.AddEvent(new OrderUpdatedOrderEvent(message.ClientId, order.Id, order.Amount));
             }
 
             order.AddEvent(new OrderItemAddedEvent(message.ClientId, order.Id, message.ProductId, message.Name, message.UnitValue, message.Quantity));
@@ -90,7 +88,6 @@ namespace NerdStore.Checkout.Application.Commands
             _orderRepository.UpdateItem(orderItem);
             _orderRepository.Update(order);
             order.AddEvent(new OrderUpdatedProductEvent(message.ClientId, order.Id, message.ProductId, message.Quantity));
-            order.AddEvent(new OrderUpdatedOrderEvent(message.ClientId, order.Id, order.Amount));
 
             return await _orderRepository.UnitOfWork.CommitAsync();
         }
@@ -117,7 +114,6 @@ namespace NerdStore.Checkout.Application.Commands
             _orderRepository.RemoveItem(orderItem);
             _orderRepository.Update(order);
             order.AddEvent(new OrderRemovedProductEvent(message.ClientId, order.Id, message.ProductId));
-            order.AddEvent(new OrderUpdatedOrderEvent(message.ClientId, order.Id, order.Amount));
 
             return await _orderRepository.UnitOfWork.CommitAsync();
         }
