@@ -47,7 +47,7 @@ namespace NerdStore.Catalog.Domain.Services
 
             if (product.Quantity == 0)
             {
-                await _mediatrHandler.PublishEventAsync(new ProductBelowStockEvent(product.Id));
+                await _mediatrHandler.PublishDomainEventAsync(new ProductBelowStockEvent(product.Id));
             }
         }
 

@@ -13,8 +13,10 @@ using NerdStore.Checkout.Data.Contexts;
 using NerdStore.Checkout.Data.Repositories;
 using NerdStore.Checkout.Domain.Interfaces;
 using NerdStore.Core.Communication.Mediator;
+using NerdStore.Core.Data.EventSourcing;
 using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
 using NerdStore.Core.Messages.CommonMessages.Notifications;
+using NerdStore.EventSourcing;
 using NerdStore.Payment.AntiCorruption;
 using NerdStore.Payment.Business.Events;
 using NerdStore.Payment.Business.Interfaces;
@@ -31,6 +33,10 @@ namespace NerdStore.API.Setup
             // CORE
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+
+            //Event Sourcing
+            services.AddSingleton<IEventStoreService, EventStoreService>();
+            services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
 
             // Catalog
             services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();

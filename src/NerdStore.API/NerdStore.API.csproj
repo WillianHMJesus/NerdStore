@@ -20,6 +20,7 @@
     <ProjectReference Include="..\NerdStore.Catalog.Data\NerdStore.Catalog.Data.csproj" />
     <ProjectReference Include="..\NerdStore.Checkout.Application\NerdStore.Checkout.Application.csproj" />
     <ProjectReference Include="..\NerdStore.Checkout.Data\NerdStore.Checkout.Data.csproj" />
+    <ProjectReference Include="..\NerdStore.EventSourcing\NerdStore.EventSourcing.csproj" />
     <ProjectReference Include="..\NerdStore.Payment.AntiCorruption\NerdStore.Payment.AntiCorruption.csproj" />
     <ProjectReference Include="..\NerdStore.Payment.Data\NerdStore.Payment.Data.csproj" />
   </ItemGroup>
